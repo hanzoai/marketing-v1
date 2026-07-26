@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     port: int = 8001
 
     # Hanzo Stack Integration
-    datastore_url: str = "http://clickhouse:8123"
+    datastore_url: str = "http://datastore:8123"
     datastore_db: str = "marketing"
     datastore_user: str = "hanzo"
     datastore_password: str = "hanzo123"

@@ -64,7 +64,7 @@ docker build -t hanzo-marketing .
 # Run
 docker run -p 8001:8001 \
   -e MARKETING_ROUTER_URL=http://router:4000/v1 \
-  -e MARKETING_DATASTORE_URL=http://clickhouse:8123 \
+  -e MARKETING_DATASTORE_URL=http://datastore:8123 \
   hanzo-marketing
 ```
 
@@ -98,7 +98,7 @@ docker run -p 8001:8001 \
 # Hanzo Stack
 MARKETING_ROUTER_URL=http://router:4000/v1
 MARKETING_ROUTER_API_KEY=sk-router-master-hanzo
-MARKETING_DATASTORE_URL=http://clickhouse:8123
+MARKETING_DATASTORE_URL=http://datastore:8123
 MARKETING_REDIS_URL=redis://:hanzo123@redis:6379
 MARKETING_NATS_URL=nats://nats:4222
 

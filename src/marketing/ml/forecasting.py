@@ -7,9 +7,7 @@ import pandas as pd
 import numpy as np
 from prophet import Prophet
 
-import clickhouse_connect
-
-from ..core.config import settings
+from ..core import datastore
 
 
 class Forecaster:
@@ -24,13 +22,7 @@ class Forecaster:
     """
 
     def __init__(self):
-        self.client = clickhouse_connect.get_client(
-            host=settings.datastore_url.replace("http://", "").split(":")[0],
-            port=8123,
-            database=settings.datastore_db,
-            username=settings.datastore_user,
-            password=settings.datastore_password,
-        )
+        self.client = datastore.client()
 
     def _get_historical_data(
         self,
@@ -38,7 +30,7 @@ class Forecaster:
         platform: str | None = None,
         days: int = 90,
     ) -> pd.DataFrame:
-        """Get historical data from ClickHouse."""
+        """Get historical data from the datastore."""
         platform_filter = f"AND platform = '{platform}'" if platform else ""
 
         query = f"""
