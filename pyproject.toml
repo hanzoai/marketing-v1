@@ -24,7 +24,7 @@ dependencies = [
     "pydantic-settings>=2.6.0",
 
     # Database
-    "clickhouse-connect>=0.8.0",
+    # Datastore is reached over its HTTP interface via httpx — see core/datastore.py
     "redis>=5.0.0",
     # sqlalchemy 2.0.36+ ships cp313t wheels via greenlet 3.1.1+
     "sqlalchemy>=2.0.36,<3",

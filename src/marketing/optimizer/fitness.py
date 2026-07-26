@@ -1,15 +1,13 @@
-"""Fitness evaluation using real campaign data from ClickHouse."""
+"""Fitness evaluation using real campaign data from the datastore."""
 
 from typing import Any
 
-import clickhouse_connect
-
-from ..core.config import settings
+from ..core import datastore
 
 
 class FitnessEvaluator:
     """
-    Evaluates campaign fitness using historical data from ClickHouse.
+    Evaluates campaign fitness using historical data from the datastore.
 
     Queries analytics data to score campaign parameters based on:
     - Conversion rate
@@ -20,13 +18,7 @@ class FitnessEvaluator:
     """
 
     def __init__(self):
-        self.client = clickhouse_connect.get_client(
-            host=settings.datastore_url.replace("http://", "").split(":")[0],
-            port=8123,
-            database=settings.datastore_db,
-            username=settings.datastore_user,
-            password=settings.datastore_password,
-        )
+        self.client = datastore.client()
 
     def get_historical_performance(
         self,
@@ -47,8 +39,8 @@ class FitnessEvaluator:
             total_spend / nullif(total_conversions, 0) as cpa,
             total_revenue / nullif(total_spend, 0) as roas
         FROM campaign_metrics
-        WHERE platform = %(platform)s
-          AND date >= today() - interval %(days)s day
+        WHERE platform = {platform:String}
+          AND date >= today() - interval {days:UInt32} day
         GROUP BY platform
         """
         try:
@@ -117,8 +109,8 @@ class FitnessEvaluator:
             avg(ctr) as avg_ctr,
             avg(engagement_rate) as avg_engagement
         FROM creative_performance
-        WHERE audience_id = %(audience_id)s
-          AND creative_type = %(creative_type)s
+        WHERE audience_id = {audience_id:String}
+          AND creative_type = {creative_type:String}
         """
         try:
             result = self.client.query(

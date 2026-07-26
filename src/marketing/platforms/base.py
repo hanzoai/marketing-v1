@@ -62,7 +62,7 @@ class AdPlatform(ABC):
         start_date: str,
         end_date: str,
     ) -> int:
-        """Sync metrics to ClickHouse datastore. Returns rows inserted."""
+        """Sync metrics to the datastore. Returns rows inserted."""
         metrics = await self.get_metrics(platform_id, start_date, end_date)
-        # Implementation would insert into ClickHouse
+        # Implementation would insert into the datastore
         return 0

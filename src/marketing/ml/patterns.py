@@ -7,9 +7,7 @@ import pandas as pd
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
 
-import clickhouse_connect
-
-from ..core.config import settings
+from ..core import datastore
 
 
 class PatternDetector:
@@ -24,13 +22,7 @@ class PatternDetector:
     """
 
     def __init__(self):
-        self.client = clickhouse_connect.get_client(
-            host=settings.datastore_url.replace("http://", "").split(":")[0],
-            port=8123,
-            database=settings.datastore_db,
-            username=settings.datastore_user,
-            password=settings.datastore_password,
-        )
+        self.client = datastore.client()
 
     def segment_audiences(
         self,
@@ -129,7 +121,7 @@ class PatternDetector:
             avg(revenue) as avg_revenue
         FROM user_attribution
         GROUP BY source, medium, campaign, device_type, country
-        HAVING cvr >= %(threshold)s
+        HAVING cvr >= {threshold:Float64}
         ORDER BY conversions DESC
         LIMIT 100
         """
@@ -228,7 +220,7 @@ class PatternDetector:
             sum(conversions) as conversions,
             conversions / nullif(clicks, 0) as cvr
         FROM campaign_metrics
-        WHERE campaign_id = %(campaign_id)s
+        WHERE campaign_id = {campaign_id:String}
         GROUP BY date
         ORDER BY date
         """
