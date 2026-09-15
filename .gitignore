@@ -1,61 +1,18 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-
-# Virtual environments
-.venv/
-venv/
-ENV/
-env/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-*~
-
-# Environment
+# Web app
+node_modules
+dist
+*.tsbuildinfo
 .env
-.env.local
 .env.*.local
 
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-.mypy_cache/
+# Go
+/marketing
 
-# Logs
-*.log
-logs/
+# Agent notes stay local
+LLM.md
+AGENTS.md
+CLAUDE.md
+GEMINI.md
 
 # OS
 .DS_Store
-Thumbs.db
-
-# uv
-uv.lock
-
-# Web UI
-node_modules
-*.tsbuildinfo
-LLM.md
