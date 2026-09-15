@@ -26,10 +26,10 @@ const proxy = { '/v1': { target: API, changeOrigin: true } }
 /**
  * The port is pinned because it is half of a redirect. IAM returns a browser to
  * the `redirect_uri` the client registered, and that URI carries the port — so a
- * port the dev server picked because 3310 was busy is a port the issuer refuses
+ * port the dev server picked because 3320 was busy is a port the issuer refuses
  * to return to, and the sign-in ends on an error page instead of this app.
  */
-const PORT = 3310
+const PORT = 3320
 
 /**
  * A single-page app has one document and many addresses, so every address that

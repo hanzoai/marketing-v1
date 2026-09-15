@@ -161,7 +161,7 @@ promos and opt-outs. Sign-in is Hanzo IAM (`hanzo-marketing`).
 
 ```
 pnpm install
-pnpm dev        # http://localhost:3310, /v1 proxied to api.hanzo.ai
+pnpm dev        # http://localhost:3320, /v1 proxied to api.hanzo.ai
 pnpm build      # dist/, served by ghcr.io/hanzoai/spa
 ```
 
