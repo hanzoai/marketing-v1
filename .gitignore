@@ -54,3 +54,8 @@ Thumbs.db
 
 # uv
 uv.lock
+
+# Web UI
+node_modules
+*.tsbuildinfo
+LLM.md

@@ -1,0 +1,29 @@
+/* The narrow window: the rail becomes a bar across the top. `:root` plus a
+   doubled class outweighs gui's `:root ._prop` rules, which load after this. */
+@media (max-width: 720px) {
+  :root .shell.shell {
+    flex-direction: column;
+  }
+  :root .rail.rail {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  :root .ways.ways {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    flex: 1;
+  }
+  :root .ways.ways > * {
+    flex: none;
+  }
+  :root .whose.whose {
+    flex-direction: row;
+    align-items: center;
+  }
+}

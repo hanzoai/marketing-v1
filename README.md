@@ -153,6 +153,20 @@ or clearly labeled a target — nothing invented.**
 
 The curriculum schema is documented in `CHECKLIST.md` → **Schema**.
 
+## Web UI
+
+The operator screens for `/v1/marketing` on api.hanzo.ai: sequences and their
+steps, enrollments, audiences with live reach, campaigns, the content calendar,
+promos and opt-outs. Sign-in is Hanzo IAM (`hanzo-marketing`).
+
+```
+pnpm install
+pnpm dev        # http://localhost:3310, /v1 proxied to api.hanzo.ai
+pnpm build      # dist/, served by ghcr.io/hanzoai/spa
+```
+
+`src/marketing.ts` names every operation the screens call.
+
 ## License
 
 MIT

@@ -1,0 +1,27 @@
+# Hanzo CI/CD — marketing web UI. .github/workflows/cicd.yml is triggers and an
+# import of hanzoai/ci; everything else is here.
+
+test:
+  # Frozen, so the check resolves the tree the Dockerfile does.
+  - name: install
+    run: |
+      set -e
+      corepack enable
+      pnpm install --frozen-lockfile
+
+  # The image's build line, run first. A vite build that emits nothing still
+  # exits 0, hence the file tests.
+  - name: build
+    run: |
+      set -e
+      pnpm build
+      test -s dist/index.html
+      test -d dist/assets
+
+images:
+  - name: marketing
+    context: .
+    dockerfile: Dockerfile
+    repo: ghcr.io/hanzoai/marketing
+    # No platforms line: ghcr.io/hanzoai/spa is multi-arch, so both build.
+    # No build secrets: the bearer is minted by hanzo.id at sign-in.
